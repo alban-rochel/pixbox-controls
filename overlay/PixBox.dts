@@ -1,0 +1,81 @@
+/*  
+* Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Purpose License Version 2 as
+* published by the Free Software Foundation
+*
+* Original from: github.com/jadonk/validation-scripts/blob/master/test-capemgr/ 
+*
+* Modified by Derek Molloy for the example on www.derekmolloy.ie
+* that maps GPIO pins for the example
+* Modified by Alban Rochel for the PixBox projects
+*/
+
+/dts-v1/;
+/plugin/;
+
+/{
+       compatible = "ti,beaglebone", "ti,beaglebone-black";
+       part-number = "PixBox";
+       version = "00A0";
+
+       fragment@0 {
+             target = <&am33xx_pinmux>;
+            
+             __overlay__ {
+                  pinctrl_test: PixBoxPins {
+			pinctrl-single,pins = <
+
+				/*0x078 0x07*/  /* P9_12 60 OUTPUT MODE7 - The LED Output */
+				0x090 0x37 /* P8_07 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x094 0x37 /* P8_08 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x09C 0x37 /* P8_09 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x098 0x37 /* P8_10 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x034 0x37 /* P8_11 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x030 0x37 /* P8_12 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x024 0x37 /* P8_13 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x028 0x37 /* P8_14 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x03C 0x37 /* P8_15 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x038 0x37 /* P8_16 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x02C 0x37 /* P8_17 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				/*0x08C 0x37*/ /* P8_18 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x020 0x37 /* P8_19 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+
+				0x07C 0x37 /* P8_26 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+
+				0x070 0x37 /* P9_11 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x078 0x37 /* P9_12 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x074 0x37 /* P9_13 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x048 0x37 /* P9_14 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x040 0x37 /* P9_15 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x04C 0x37 /* P9_16 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x15C 0x37 /* P9_17 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x158 0x37 /* P9_18 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+
+				0x154 0x37 /* P9_21 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x150 0x37 /* P9_22 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x044 0x37 /* P9_23 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x184 0x37 /* P9_24 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x180 0x37 /* P9_26 100111 Fast Receiver (pulldown) no-pullup/pulldown mode 7*/
+				0x1A4 0x37 /* P9_27 */
+				0x198 0x37 /* P9_30 */
+
+
+			>;
+		  };
+             };
+       };
+
+       fragment@1 {
+		target = <&ocp>;
+		__overlay__ {
+			test_helper: helper {
+				compatible = "bone-pinmux-helper";
+				pinctrl-names = "default";
+				pinctrl-0 = <&pinctrl_test>;
+				status = "okay";
+			};
+		};
+	};
+};
